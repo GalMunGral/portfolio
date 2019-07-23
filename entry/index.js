@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const server = http.createServer((req, res) => {
-  console.log(req.url, /^\/respotify/.test(req.url));
+  console.log('yo')
   if (/^\/respotify/.test(req.url)) {
     let path = req.url.slice('/respotify'.length);
     let hostAddr;
@@ -11,9 +11,14 @@ const server = http.createServer((req, res) => {
     } else {
       hostAddr = 'http://127.0.0.1:3000';
     }
-    http.get(hostAddr + path, response => {
-      response.pipe(res);
+    let _req = http.request(hostAddr + path, {
+      method: req.method,
+      headers: req.headers
+    }, _res => {
+      res.writeHead(_res.statusCode, _res.statusMessage, _res.headers);
+      _res.pipe(res);
     });
+    req.pipe(_req);
     return;
   }
   let path = req.url.slice(1);
