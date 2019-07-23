@@ -1,4 +1,5 @@
 from ubuntu:latest
+
 RUN apt-get update
 RUN apt-get install -y sudo curl git
 # Python
@@ -14,13 +15,18 @@ RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA3162033
 RUN echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
 RUN sudo apt-get update && sudo apt-get install -y mongodb-org
+RUN mkdir -p /data/db
+
 # Install projects
 RUN mkdir /entry /code
 ADD entry /entry
-# RUN cd code && git clone https://github.com/GalMunGral/respotify.git && cd respotify && ./install.sh
-RUN cd code && git clone https://github.com/GalMunGral/notube.git && cd notube && ./install.sh
+# RUN cd code && git clone https://github.com/GalMunGral/respotify.git
+# RUN cd code/respotify && ./install.sh
+RUN cd code && git clone https://github.com/GalMunGral/notube.git
+RUN cd code/notube && ./install.sh
 # RUN cd code && git clone https://github.com/GalMunGral/web-repl.git
+# RUN cd code/web-repl && ./install.sh
 # RUN git clone https://github.com/GalMunGral/cs4400-marta-traffic.git
-# RUN (cd cs4400-marta-traffic/backend && npm install); (cd cs4400-marta-traffic/frontend && npm install)
+
 COPY start.sh /start.sh
 CMD ./start.sh
