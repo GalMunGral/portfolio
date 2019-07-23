@@ -5,7 +5,8 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 RUN apt-get install -y nodejs
 RUN apt-get install -y mysql-server
 RUN apt-get install -y  python3 python3-pip python3-venv
-RUN export LC_ALL=C.UTF-8 && export LANG=C.UTF-8
+RUN npm install -g serve nodemon
+# COPY entry /entry
 # RUN git clone https://github.com/GalMunGral/respotify.git
 # RUN git clone https://github.com/GalMunGral/notube.git
 # RUN git clone https://github.com/GalMunGral/web-repl.git
