@@ -26,6 +26,7 @@ RUN cd code && git clone https://github.com/GalMunGral/notube.git
 RUN cd code/notube && ./install.sh
 RUN cd code && git clone https://github.com/GalMunGral/respotify.git
 RUN cd code/respotify && ./install.sh
+RUN echo hello
 RUN cd code && git clone https://github.com/GalMunGral/web-repl.git
 RUN cd code/web-repl && ./install.sh
 # RUN git clone https://github.com/GalMunGral/cs4400-marta-traffic.git
