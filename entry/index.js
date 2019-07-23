@@ -1,7 +1,6 @@
 const http = require('http');
 const fs = require('fs');
 const server = http.createServer((req, res) => {
-  console.log('yo')
   if (/^\/respotify/.test(req.url)) {
     let path = req.url.slice('/respotify'.length);
     let hostAddr;
@@ -11,6 +10,7 @@ const server = http.createServer((req, res) => {
     } else {
       hostAddr = 'http://127.0.0.1:3000';
     }
+    console.log('Send Request To:', hostAddr + path);
     let _req = http.request(hostAddr + path, {
       method: req.method,
       headers: req.headers
@@ -28,7 +28,6 @@ const server = http.createServer((req, res) => {
     res.statusCode = 404;
     res.end('Not Found');
   }
-  res.end('yo');
 });
 
-server.listen(80, () => console.log('Listening on 80'));
+server.listen(process.env.PORT || 80, () => console.log('Listening on 80'));
