@@ -56,25 +56,25 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // if (/^\/respotify/.test(req.url)) {
-  //   let path = req.url.slice('/respotify'.length);
-  //   let hostAddr;
-  //   if (/^\/api/.test(path)) {
-  //     hostAddr = 'http://127.0.0.1:3001';
-  //     path = path.slice('/api'.length);
-  //   } else {
-  //     hostAddr = 'http://127.0.0.1:3000';
-  //   }
-  //   let _req = http.request(hostAddr + path, {
-  //     method: req.method,
-  //     headers: req.headers
-  //   }, _res => {
-  //     res.writeHead(_res.statusCode, _res.statusMessage, _res.headers);
-  //     _res.pipe(res);
-  //   });
-  //   req.pipe(_req);
-  //   return;
-  // }
+  if (/^\/marta/.test(req.url)) {
+    let path = req.url.slice('/marta'.length);
+    let hostAddr;
+    if (/^\/api/.test(path)) {
+      hostAddr = 'http://127.0.0.1:3006';
+      path = path.slice('/api'.length);
+    } else {
+      hostAddr = 'http://127.0.0.1:3005';
+    }
+    let _req = http.request(hostAddr + path, {
+      method: req.method,
+      headers: req.headers
+    }, _res => {
+      res.writeHead(_res.statusCode, _res.statusMessage, _res.headers);
+      _res.pipe(res);
+    });
+    req.pipe(_req);
+    return;
+  }
 
   let path = req.url.slice(1);
   if (fs.existsSync(path)) {
